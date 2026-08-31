@@ -18,17 +18,14 @@ app = FastAPI(
 )
 
 
-@app.get("/health")
+# Create a basic health endpoint to confirm the API is running
+@app.get("/")
 def health_check():
-    """
-    Check whether the API is running.
-    """
 
+    # Return a simple status response
     return {
-        "status": "healthy",
-        "message": "AI Lead Scoring API is running"
+        "status": "API is running"
     }
-
 
 @app.post(
     "/predict",
