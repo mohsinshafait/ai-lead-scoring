@@ -5,7 +5,7 @@ import streamlit as st
 import requests
 
 # Define the base URL of the FastAPI backend
-API_BASE_URL = "http://127.0.0.1:8000"
+API_BASE_URL = "https://ai-lead-scoring-hvsq.onrender.com"
 
 # Configure the browser page before creating any Streamlit components
 st.set_page_config(
@@ -28,7 +28,10 @@ st.write(
 # Check whether the FastAPI backend is running
 try:
     # Send a request to the backend
-    response = requests.get(API_BASE_URL)
+    response = requests.get(
+    API_BASE_URL,
+    timeout=10
+)
 
     # Check whether the backend responded successfully
     if response.status_code == 200:
@@ -195,7 +198,7 @@ if submitted:
     }
 
     # Define the URL of the FastAPI prediction endpoint
-    API_URL = "http://127.0.0.1:8000/predict"
+    API_URL = f"{API_BASE_URL}/predict"
 
     # Display a spinner while waiting for the backend response
     with st.spinner("Analyzing lead..."):
@@ -203,9 +206,10 @@ if submitted:
         try:
             # Send the lead data to the FastAPI backend as JSON
             response = requests.post(
-                API_URL,
-                json=lead_data
-            )
+            API_URL,
+            json=lead_data,
+            timeout=30
+        )
 
             # Raise an error if the API returned an unsuccessful status code
             response.raise_for_status()
