@@ -116,3 +116,23 @@ class V2ScoreResponse(BaseModel):
     conversion_probability: float
     priority: str
     recommended_action: str
+
+
+class ScoreHistoryItem(BaseModel):
+    """
+    Score information for one temporal snapshot.
+    """
+
+    snapshot_day: int
+    conversion_probability: float
+    priority: str
+    recommended_action: str
+
+
+class ScoreHistoryResponse(BaseModel):
+    """
+    Complete dynamic score history for a lead.
+    """
+
+    lead_id: int
+    scores: list[ScoreHistoryItem]

@@ -29,3 +29,6 @@ models/*.json
 # OS
 .DS_Store
 Thumbs.db
+
+# Synthetic generated data
+database/synthetic_data/output/
